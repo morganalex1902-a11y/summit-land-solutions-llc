@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import TopBar from "@/components/TopBar";
@@ -8,8 +7,6 @@ import Footer from "@/components/Footer";
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Trees, Tractor, Shovel, HardHat, Truck, Droplets } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Images
 import imgClearing from "@/assets/land-clearing.png";
@@ -19,8 +16,6 @@ import imgDozer from "@/assets/dirt-road.png";
 import imgDrainage from "@/assets/drainage-pipes.png";
 import imgDemo from "@/assets/trenching.png";
 import imgDelivery from "@/assets/gravel-road.png";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -75,44 +70,6 @@ const services = [
 ];
 
 const Index = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Optimized service card animations
-      gsap.from(".service-card", {
-        scrollTrigger: {
-          trigger: ".services-grid",
-          start: "top 75%",
-          once: true, // Only animate once for better performance
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.5, // Faster animation
-        stagger: 0.05, // Quicker stagger
-        ease: "power3.out", // Snappier easing
-        force3D: true, // GPU acceleration
-      });
-
-      // Stats counter animation
-      gsap.from(".expertise-stats > div", {
-        scrollTrigger: {
-          trigger: ".expertise-stats",
-          start: "top 80%",
-          once: true,
-        },
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.04,
-        ease: "back.out",
-        force3D: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -127,7 +84,7 @@ const Index = () => {
         <Hero />
         
         {/* Our Expertise Section */}
-        <section className="py-24 bg-secondary/10" ref={sectionRef}>
+        <section className="py-24 bg-secondary/10">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-6">
               <span className="text-primary font-semibold text-sm uppercase tracking-wider mb-2 block">Our Expertise</span>
