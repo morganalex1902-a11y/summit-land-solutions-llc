@@ -102,38 +102,38 @@ const Index = () => {
                 { value: "Free", label: "Estimates" },
                 { value: "NW GA", label: "Service Area" },
               ].map((stat, i) => (
-                <GlassCard key={i} className="text-center py-5 px-3">
+                <div key={i} className="glass-card rounded-2xl p-6 text-center py-5 px-3">
                   <span className="text-2xl md:text-3xl font-bold text-primary block">{stat.value}</span>
                   <span className="text-sm text-muted-foreground">{stat.label}</span>
-                </GlassCard>
+                </div>
               ))}
             </div>
             
             {/* Services Grid */}
             <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <GlassCard key={index} hoverEffect className="service-card overflow-hidden group p-0 will-change-transform">
+                <GlassCard key={index} className="service-card overflow-hidden group p-0">
                   <div className="h-48 overflow-hidden relative bg-gradient-to-br from-primary/5 to-secondary/5">
-                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors duration-300 z-10 will-change-auto" />
+                    <div className="absolute inset-0 bg-primary/10 z-10" />
                     <img
                       src={service.image}
                       alt={`${service.title} services in Calhoun GA`}
                       decoding="async"
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-6">
-                    <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300 will-change-auto">
+                    <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary mb-4">
                       <service.icon size={24} />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                     <p className="text-muted-foreground mb-6 line-clamp-2">{service.description}</p>
-                    <Link 
+                    <Link
                       to={service.path}
                       className="inline-flex items-center text-primary font-medium hover:underline"
                     >
-                      Learn more <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      Learn more <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </div>
                 </GlassCard>
