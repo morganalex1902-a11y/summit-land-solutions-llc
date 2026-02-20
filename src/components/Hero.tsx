@@ -11,19 +11,21 @@ const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".hero-text", {
-        y: 50,
+        y: 40,
         opacity: 0,
-        duration: 1,
-        stagger: 0.2,
+        duration: 0.7, // Faster hero animation
+        stagger: 0.12,
         ease: "power3.out",
+        force3D: true,
       });
-      
+
       gsap.from(".hero-buttons", {
-        y: 30,
+        y: 20,
         opacity: 0,
-        duration: 1,
-        delay: 0.8,
+        duration: 0.6,
+        delay: 0.5, // Faster overall animation
         ease: "power3.out",
+        force3D: true,
       });
     }, contentRef);
 

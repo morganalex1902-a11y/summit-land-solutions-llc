@@ -79,16 +79,34 @@ const Index = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Optimized service card animations
       gsap.from(".service-card", {
         scrollTrigger: {
           trigger: ".services-grid",
-          start: "top 80%",
+          start: "top 75%",
+          once: true, // Only animate once for better performance
         },
-        y: 50,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
+        duration: 0.5, // Faster animation
+        stagger: 0.05, // Quicker stagger
+        ease: "power3.out", // Snappier easing
+        force3D: true, // GPU acceleration
+      });
+
+      // Stats counter animation
+      gsap.from(".expertise-stats > div", {
+        scrollTrigger: {
+          trigger: ".expertise-stats",
+          start: "top 80%",
+          once: true,
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.04,
+        ease: "back.out",
+        force3D: true,
       });
     }, sectionRef);
 
@@ -137,18 +155,19 @@ const Index = () => {
             {/* Services Grid */}
             <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <GlassCard key={index} hoverEffect className="service-card overflow-hidden group p-0">
-                  <div className="h-48 overflow-hidden relative">
-                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors z-10" />
-                    <img 
-                      src={service.image} 
-                      alt={`${service.title} services in Calhoun GA`} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                <GlassCard key={index} hoverEffect className="service-card overflow-hidden group p-0 will-change-transform">
+                  <div className="h-48 overflow-hidden relative bg-gradient-to-br from-primary/5 to-secondary/5">
+                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors duration-300 z-10 will-change-auto" />
+                    <img
+                      src={service.image}
+                      alt={`${service.title} services in Calhoun GA`}
+                      decoding="async"
                       loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
                     />
                   </div>
                   <div className="p-6">
-                    <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300 will-change-auto">
                       <service.icon size={24} />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{service.title}</h3>
