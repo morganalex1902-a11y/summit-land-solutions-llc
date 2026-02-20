@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -49,12 +51,39 @@ const services = [
     description: "Structure removal and debris hauling for residential and light commercial needs. We ensure safe takedown and complete cleanup.",
     details: ["Building teardown", "Concrete removal", "Debris hauling", "Site cleanup"],
     icon: HardHat
+  },
+  {
+    id: "material-delivery",
+    title: "Material Delivery",
+    description: "Quality gravel, dirt, fill, and other materials delivered directly to your project site. We ensure timely delivery and proper placement.",
+    details: ["Gravel delivery", "Fill dirt", "Sand delivery", "Material placement"],
+    icon: Truck
   }
 ];
 
 const Services = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Extract the service ID from the URL path (e.g., /services/land-clearing -> land-clearing)
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    const serviceId = pathSegments[1]; // Get the part after /services/
+
+    if (serviceId) {
+      // Add a small delay to ensure DOM is ready
+      const timer = setTimeout(() => {
+        const element = document.getElementById(serviceId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Helmet>
         <title>Our Services | Land Clearing & Excavation Calhoun, GA</title>
         <meta name="description" content="Explore our services including land clearing, forestry mulching, grading, dozer work, and drainage solutions in Calhoun, GA." />
